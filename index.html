@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <!-- ВАЖНО: этот тег обеспечивает правильное масштабирование на мобильных -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <!-- Улучшенный мета-тег для мобильных -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Калькулятор модели и операторов</title>
     <style>
         * {
@@ -19,7 +19,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: 10px;
+            padding: 8px;
         }
 
         .container {
@@ -29,130 +29,213 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             width: 100%;
             max-width: 700px;
-            padding: 20px;
+            padding: 16px;
             transition: all 0.3s ease;
-            margin: 10px 0;
+            margin: 5px 0;
         }
 
-        /* Адаптация для маленьких экранов */
+        /* ОСНОВНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ */
         @media (max-width: 600px) {
             body {
-                padding: 5px;
-                align-items: flex-start;
+                padding: 4px;
             }
             
             .container {
-                padding: 15px;
-                border-radius: 15px;
+                padding: 12px;
+                border-radius: 16px;
             }
             
             h1 {
-                font-size: 1.6em;
+                font-size: 1.5em;
+                gap: 5px;
+            }
+            
+            h1 span {
+                font-size: 1.3em;
+            }
+            
+            .subtitle {
+                font-size: 0.9em;
+                margin-bottom: 15px;
+                padding-left: 10px;
             }
             
             .block {
-                padding: 15px;
-                margin-bottom: 20px;
+                padding: 12px;
+                margin-bottom: 15px;
+                border-radius: 12px;
             }
             
             .block-title {
                 font-size: 1.2em;
-                margin-bottom: 15px;
+                margin-bottom: 12px;
             }
             
+            /* Сетка модели - 5 колонок на мобильных */
             .model-grid {
                 display: grid;
                 grid-template-columns: repeat(5, 1fr);
-                gap: 5px;
+                gap: 4px;
+                margin-bottom: 15px;
             }
             
             .model-input-group label {
-                font-size: 0.8em;
+                font-size: 0.7em;
                 margin-bottom: 3px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             
+            /* УЛУЧШЕННЫЕ ПОЛЯ ВВОДА ДЛЯ МОБИЛЬНЫХ */
             .input-field {
-                padding: 8px 10px;
-                font-size: 14px;
+                padding: 10px 5px;
+                font-size: 16px !important; /* Увеличиваем шрифт для читаемости */
+                text-align: center;
+                border-radius: 8px;
+                -webkit-appearance: none;
+                appearance: none;
             }
             
+            /* Специально для iPhone, чтобы цифры не вылезали */
+            .input-field[type="number"] {
+                -moz-appearance: textfield;
+            }
+            
+            .input-field[type="number"]::-webkit-outer-spin-button,
+            .input-field[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            
+            /* Контейнеры для результатов */
+            .sum-indicator {
+                padding: 10px 12px;
+                margin-bottom: 10px;
+                border-radius: 8px;
+            }
+            
+            .sum-indicator-label {
+                font-size: 0.85em;
+                white-space: nowrap;
+            }
+            
+            .sum-indicator-value {
+                font-size: 1.1em;
+                white-space: nowrap;
+                margin-left: 8px;
+            }
+            
+            .total-sum-box {
+                padding: 10px 12px;
+                margin-top: 15px;
+                border-radius: 10px;
+            }
+            
+            .total-sum-label {
+                font-size: 0.9em;
+                white-space: nowrap;
+            }
+            
+            .total-sum-value {
+                font-size: 1.4em;
+                white-space: nowrap;
+                margin-left: 8px;
+            }
+            
+            /* Карточки операторов */
             .operators-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                gap: 12px;
             }
             
             .operator-card {
                 padding: 12px;
             }
             
-            .operator-card .result-value {
-                font-size: 1.2em;
+            .operator-card .input-group {
+                margin-bottom: 10px;
             }
             
-            .sum-indicator {
-                padding: 10px 12px;
-            }
-            
-            .sum-indicator-value {
-                font-size: 1.1em;
-            }
-            
-            .result-value {
-                font-size: 1.4em;
-            }
-            
-            .total-sum-box {
-                padding: 12px 15px;
-            }
-            
-            .total-sum-value {
-                font-size: 1.6em;
-            }
-            
-            .condition-note {
-                font-size: 11px;
-            }
-            
-            .reset-btn {
-                padding: 18px 15px;
-                font-size: 20px;
-            }
-        }
-
-        /* Для очень маленьких экранов (до 400px) */
-        @media (max-width: 400px) {
-            .model-grid {
-                grid-template-columns: repeat(5, 1fr);
-                gap: 3px;
-            }
-            
-            .model-input-group label {
-                font-size: 0.7em;
-            }
-            
-            .input-field {
-                padding: 6px 5px;
-                font-size: 12px;
-            }
-            
-            .block-title {
-                font-size: 1.1em;
-            }
-            
-            .result-label {
-                font-size: 0.8em;
-            }
-            
-            .total-sum-label {
+            .operator-card .input-group label {
                 font-size: 0.9em;
             }
             
+            .operator-card .input-field {
+                padding: 12px 10px;
+                font-size: 16px;
+                text-align: left; /* Для ввода текста удобнее слева */
+            }
+            
+            .operator-card .result-box {
+                padding: 10px 12px;
+            }
+            
+            .operator-card .result-label {
+                font-size: 0.8em;
+            }
+            
+            .operator-card .result-value {
+                font-size: 1.2em;
+                white-space: nowrap;
+            }
+            
+            /* Кнопка сброса */
             .reset-btn {
-                padding: 15px 12px;
+                padding: 16px 15px;
+                font-size: 20px;
+                border-radius: 40px;
+            }
+            
+            /* Пояснение условий */
+            .condition-note {
+                font-size: 11px;
+                line-height: 1.4;
+            }
+        }
+
+        /* Для очень маленьких экранов (iPhone SE и подобные) */
+        @media (max-width: 375px) {
+            .model-grid {
+                gap: 2px;
+            }
+            
+            .model-input-group label {
+                font-size: 0.65em;
+            }
+            
+            .input-field {
+                padding: 8px 3px;
+                font-size: 14px !important;
+            }
+            
+            .sum-indicator-label {
+                font-size: 0.8em;
+            }
+            
+            .sum-indicator-value {
+                font-size: 1em;
+            }
+            
+            .total-sum-label {
+                font-size: 0.85em;
+            }
+            
+            .total-sum-value {
+                font-size: 1.2em;
+            }
+            
+            .operator-card .result-value {
+                font-size: 1.1em;
+            }
+            
+            .reset-btn {
+                padding: 14px 12px;
                 font-size: 18px;
             }
         }
 
+        /* Десктопные стили (без изменений) */
         h1 {
             color: #333;
             font-size: 2em;
@@ -196,7 +279,6 @@
             font-size: 1.2em;
         }
 
-        /* Сетка для полей модели */
         .model-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -225,15 +307,12 @@
             font-size: 16px;
             transition: border-color 0.3s;
             outline: none;
-            -webkit-appearance: none;
-            appearance: none;
         }
 
         .input-field:focus {
             border-color: #667eea;
         }
 
-        /* Стиль для placeholder - обычный шрифт */
         .input-field::placeholder {
             color: #aaa;
             font-style: normal;
@@ -274,7 +353,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
 
         .result-label {
@@ -288,6 +366,8 @@
             font-size: 1.6em;
             font-weight: 700;
             color: #667eea;
+            word-break: break-word;
+            text-align: right;
         }
 
         .operators-grid {
@@ -301,7 +381,6 @@
             background: white;
             border-radius: 12px;
             padding: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             border: 1px solid #eaeef2;
         }
 
@@ -324,7 +403,6 @@
             color: #667eea;
         }
 
-        /* Стиль для итоговых блоков (одинаковый для модели и оператора) */
         .total-sum-box {
             background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
             border: 2px solid #667eea;
@@ -351,31 +429,16 @@
             color: #667eea;
         }
 
-        /* Стиль для индикатора суммы (оставляем как было) */
-        .sum-indicator {
-            background: white;
-            border: 2px dashed #667eea;
-            border-radius: 10px;
-            padding: 12px 15px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Удален блок статистики, теперь только кнопка */
-
-        /* НОВЫЙ СТИЛЬ ДЛЯ КНОПКИ - растянутая, с нежно-красным цветом */
         .reset-btn {
             background: rgba(255, 255, 255, 0.8);
-            border: 2px solid #ffb4b4; /* нежно-красная рамка */
-            color: #d46b6b; /* нежно-красный текст */
-            padding: 20px 20px; /* увеличенный padding */
-            border-radius: 50px; /* более округлые края */
+            border: 2px solid #ffb4b4;
+            color: #d46b6b;
+            padding: 20px 20px;
+            border-radius: 50px;
             cursor: pointer;
-            font-size: 22px; /* увеличенный шрифт */
-            font-weight: 600; /* полужирный */
-            letter-spacing: 1px; /* небольшой интервал */
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
             margin-top: 20px;
             width: 100%;
             transition: all 0.3s ease;
@@ -384,11 +447,11 @@
         }
 
         .reset-btn:hover {
-            background: #fff0f0; /* чуть светлее при наведении */
+            background: #fff0f0;
             border-color: #ff9f9f;
             color: #c45b5b;
             box-shadow: 0 6px 16px rgba(255, 150, 150, 0.4);
-            transform: translateY(-2px); /* легкий подъем */
+            transform: translateY(-2px);
         }
 
         .reset-btn:active {
@@ -403,11 +466,6 @@
             font-style: normal;
             text-align: right;
         }
-
-        /* Добавляем небольшой отступ перед кнопкой */
-        .button-spacer {
-            margin-top: 15px;
-        }
     </style>
 </head>
 <body>
@@ -420,33 +478,18 @@
             Зацени, сколько вы заработали💸!
         </div>
 
-        <!-- Блок 1: Модель (с 5 полями ввода) -->
+        <!-- Блок 1: Модель -->
         <div class="block">
             <div class="block-title">
                 <span>👸🏼</span> Модель
             </div>
-            
-            <!-- Сама формула скрыта от глаз -->
-            <div style="display: none;">Формула: (Смена1+Смена2+Смена3+Смена4+Смена5) * 65 / 4</div>
-            
-            <!-- 5 полей ввода с названиями Смена 1-5 -->
-            <div class="model-grid" id="modelGrid">
-                <!-- Поля будут сгенерированы через JS -->
-            </div>
-
-            <!-- Индикатор суммы -->
+            <div class="model-grid" id="modelGrid"></div>
             <div class="sum-indicator">
-                <span class="sum-indicator-label">
-                    <span>📊</span> Сумма всех смен:
-                </span>
+                <span class="sum-indicator-label"><span>📊</span> Сумма всех смен:</span>
                 <span class="sum-indicator-value" id="modelSum">0</span>
             </div>
-            
-            <!-- Итоговый результат модели в новом стиле -->
             <div class="total-sum-box">
-                <span class="total-sum-label">
-                    <span>💰</span> Итого за все смены:
-                </span>
+                <span class="total-sum-label"><span>💰</span> Итого за все смены:</span>
                 <span class="total-sum-value" id="modelResult">0.000</span>
             </div>
         </div>
@@ -456,80 +499,37 @@
             <div class="block-title">
                 <span>🎥</span> Оператор
             </div>
-            
-            <!-- Формула скрыта, но добавлены условия -->
-            <div style="display: none;">
-                Условия для каждой смены:
-                - если поле пустое → результат = 0
-                - если X < 299.99 → результат = 2000
-                - если X > 999.99 → результат = X * 65 / 4 / 2
-                - иначе → результат = X * 65 / 4 - 60%
-            </div>
-            
-            <div class="operators-grid" id="operatorsContainer">
-                <!-- Пять карточек будут сгенерированы через JS -->
-            </div>
-
-            <!-- Сумма всех смен (аналогично модели) -->
+            <div class="operators-grid" id="operatorsContainer"></div>
             <div class="sum-indicator">
-                <span class="sum-indicator-label">
-                    <span>📊</span> Сумма всех смен:
-                </span>
+                <span class="sum-indicator-label"><span>📊</span> Сумма всех смен:</span>
                 <span class="sum-indicator-value" id="operatorsSum">0</span>
             </div>
-
-            <!-- Итог за все смены -->
             <div class="total-sum-box">
-                <span class="total-sum-label">
-                    <span>💰</span> Итого за все смены:
-                </span>
+                <span class="total-sum-label"><span>💰</span> Итого за все смены:</span>
                 <span class="total-sum-value" id="totalOperatorsSum">0.000</span>
             </div>
-
-            <!-- Пояснение условий -->
             <div class="condition-note">
                 * если меньше 299.99 → 2000<br>
                 * если больше 999.99 → X*65/4/2
             </div>
         </div>
 
-        <!-- Кнопка сброса - растянутая и с нежно-красным цветом -->
         <button class="reset-btn" id="resetBtn">🔄 Очистить все поля</button>
     </div>
 
     <script>
-        // --- Конфигурация ---
         const MODEL_FORMULA = (x) => (x * 65) / 4;
-        
-        // Функция для операторов с тремя условиями
         const OPERATOR_FORMULA = (x, isEmpty) => {
-            // Условие 1: Если поле пустое, возвращаем 0
-            if (isEmpty) {
-                return 0;
-            }
-            
-            // Условие 2: Если значение меньше 299.99, возвращаем 2000
-            if (x < 299.99) {
-                return 2000;
-            }
-            
-            // Условие 3: Если значение больше 999.99, применяем формулу X*65/4/2
-            if (x > 999.99) {
-                return (x * 65) / 4 / 2;
-            }
-            
-            // Условие 4: Для всех остальных случаев (от 299.99 до 999.99)
-            // применяем обычную формулу X*65/4-60%
+            if (isEmpty) return 0;
+            if (x < 299.99) return 2000;
+            if (x > 999.99) return (x * 65) / 4 / 2;
             const base = (x * 65) / 4;
-            return base * 0.4; // эквивалентно base - 60% = base * 0.4
+            return base * 0.4;
         };
 
-        // Количество операторов
         const OPERATOR_COUNT = 5;
-        // Количество полей в модели
         const MODEL_FIELDS_COUNT = 5;
 
-        // --- Элементы DOM ---
         const modelGrid = document.getElementById('modelGrid');
         const modelSum = document.getElementById('modelSum');
         const modelResult = document.getElementById('modelResult');
@@ -538,85 +538,57 @@
         const totalOperatorsSum = document.getElementById('totalOperatorsSum');
         const resetBtn = document.getElementById('resetBtn');
 
-        // Хранилище для ссылок
-        const modelInputs = []; // массив для 5 полей модели
+        const modelInputs = [];
         const operatorInputs = [];
         const operatorResults = [];
 
-        // Флаг для предотвращения зацикливания при синхронизации
         let isSyncing = false;
 
-        // --- Функции форматирования (3 знака) ---
         function formatNumber(value) {
             if (isNaN(value) || value === null || value === '') return '0.000';
             return value.toFixed(3);
         }
 
-        // --- Обновление модели (сумма 5 полей -> результат) ---
         function updateModel() {
             if (isSyncing) return;
-            
-            // Считаем сумму всех полей модели
             let sum = 0;
             modelInputs.forEach(input => {
                 const val = parseFloat(input.value);
-                if (!isNaN(val)) {
-                    sum += val;
-                }
+                if (!isNaN(val)) sum += val;
             });
-            
-            // Обновляем отображение суммы
             modelSum.textContent = sum.toFixed(3);
-            
-            // Вычисляем результат по формуле
-            const result = MODEL_FORMULA(sum);
-            modelResult.textContent = formatNumber(result);
+            modelResult.textContent = formatNumber(MODEL_FORMULA(sum));
         }
 
-        // --- Синхронизация значений из модели в операторы ---
         function syncModelToOperators() {
             isSyncing = true;
-            
-            // Копируем значения из полей модели в поля операторов
             for (let i = 0; i < MODEL_FIELDS_COUNT; i++) {
                 if (operatorInputs[i] && modelInputs[i]) {
                     operatorInputs[i].value = modelInputs[i].value;
                 }
             }
-            
-            // Обновляем все результаты операторов
-            for (let i = 0; i < OPERATOR_COUNT; i++) {
-                updateOperator(i, true); // true = пропустить синхронизацию
-            }
-            
+            for (let i = 0; i < OPERATOR_COUNT; i++) updateOperator(i, true);
             isSyncing = false;
         }
 
-        // --- Обновление суммы всех смен в блоке оператор ---
         function updateOperatorsSum() {
             let sum = 0;
             operatorInputs.forEach(input => {
                 const val = parseFloat(input.value);
-                if (!isNaN(val)) {
-                    sum += val;
-                }
+                if (!isNaN(val)) sum += val;
             });
             operatorsSum.textContent = sum.toFixed(3);
         }
 
-        // --- Обновление итоговой суммы всех результатов операторов ---
         function updateTotalSum() {
             let total = 0;
             operatorResults.forEach(resultSpan => {
                 const value = parseFloat(resultSpan.textContent);
-                if (!isNaN(value)) {
-                    total += value;
-                }
+                if (!isNaN(value)) total += value;
             });
             totalOperatorsSum.textContent = formatNumber(total);
         }
 
-        // --- Обновление результата для конкретного оператора (с тремя условиями) ---
         function updateOperator(index, skipSync = false) {
             const input = operatorInputs[index];
             const resultSpan = operatorResults[index];
@@ -625,46 +597,32 @@
                 const isEmpty = input.value === '';
                 const x = parseFloat(input.value);
                 const validX = isNaN(x) ? 0 : x;
-                const result = OPERATOR_FORMULA(validX, isEmpty);
-                resultSpan.textContent = formatNumber(result);
-                
-                // Обновляем суммы
+                resultSpan.textContent = formatNumber(OPERATOR_FORMULA(validX, isEmpty));
                 updateOperatorsSum();
                 updateTotalSum();
             }
         }
 
-        // --- Обновление всех операторов ---
         function updateAllOperators() {
-            for (let i = 0; i < OPERATOR_COUNT; i++) {
-                updateOperator(i);
-            }
+            for (let i = 0; i < OPERATOR_COUNT; i++) updateOperator(i);
             updateOperatorsSum();
             updateTotalSum();
         }
 
-        // --- Создание полей модели (5 штук) ---
         function createModelFields() {
             modelGrid.innerHTML = '';
             modelInputs.length = 0;
-
             for (let i = 1; i <= MODEL_FIELDS_COUNT; i++) {
                 const inputGroup = document.createElement('div');
                 inputGroup.className = 'model-input-group';
-                
                 const inputId = `modelInput${i}`;
-                
                 inputGroup.innerHTML = `
                     <label for="${inputId}">Смена ${i}</label>
-                    <input type="number" id="${inputId}" class="input-field" placeholder="0" step="any">
+                    <input type="number" id="${inputId}" class="input-field" placeholder="0" step="any" inputmode="numeric">
                 `;
-                
                 modelGrid.appendChild(inputGroup);
-                
                 const inputEl = document.getElementById(inputId);
                 modelInputs.push(inputEl);
-                
-                // Добавляем обработчик для обновления модели и синхронизации
                 inputEl.addEventListener('input', () => {
                     updateModel();
                     syncModelToOperators();
@@ -672,91 +630,53 @@
             }
         }
 
-        // --- Создание интерфейса операторов (начальные значения = пусто) ---
         function createOperators() {
             operatorsContainer.innerHTML = '';
-            
             operatorInputs.length = 0;
             operatorResults.length = 0;
-
             for (let i = 1; i <= OPERATOR_COUNT; i++) {
                 const card = document.createElement('div');
                 card.className = 'operator-card';
-                
                 const inputId = `operator${i}Input`;
                 const resultId = `operator${i}Result`;
-                
                 card.innerHTML = `
                     <div class="input-group">
                         <label for="${inputId}">Смена №${i}</label>
-                        <input type="number" id="${inputId}" class="input-field" placeholder="0" step="any">
+                        <input type="number" id="${inputId}" class="input-field" placeholder="0" step="any" inputmode="numeric">
                     </div>
                     <div class="result-box">
                         <span class="result-label">Результат ${i}:</span>
                         <span class="result-value" id="${resultId}">0.000</span>
                     </div>
                 `;
-                
                 operatorsContainer.appendChild(card);
-                
                 const inputEl = document.getElementById(inputId);
                 const resultEl = document.getElementById(resultId);
-                
                 operatorInputs.push(inputEl);
                 operatorResults.push(resultEl);
-                
-                // Добавляем обработчик для ручного изменения в операторах
                 inputEl.addEventListener('input', (function(idx) {
-                    return function() {
-                        if (!isSyncing) {
-                            updateOperator(idx);
-                        }
-                    };
+                    return function() { if (!isSyncing) updateOperator(idx); };
                 })(i - 1));
             }
-            
-            // Изначально все поля пустые, суммы = 0
             updateOperatorsSum();
             updateTotalSum();
         }
 
-        // --- Очистка всех полей ---
         function resetAllToDefault() {
             isSyncing = true;
-            
-            // Очищаем поля модели
-            modelInputs.forEach(input => {
-                input.value = '';
-            });
-            
-            // Очищаем поля операторов
-            operatorInputs.forEach(input => {
-                input.value = '';
-            });
-            
+            modelInputs.forEach(input => input.value = '');
+            operatorInputs.forEach(input => input.value = '');
             isSyncing = false;
-            
-            // Обновляем все результаты (будут 0.000)
             updateModel();
             updateAllOperators();
         }
 
-        // --- Инициализация ---
         function initApp() {
-            // Создаем поля модели (5 штук)
             createModelFields();
-            
-            // Создаем поля операторов
             createOperators();
-            
-            // Кнопка сброса
             resetBtn.addEventListener('click', resetAllToDefault);
-            
-            // Начальное обновление (все результаты = 0.000)
             updateModel();
             updateAllOperators();
-            
-            console.log('Приложение готово. Кнопка сброса увеличена и имеет нежно-красный цвет');
         }
 
         document.addEventListener('DOMContentLoaded', initApp);
