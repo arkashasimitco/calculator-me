@@ -2,7 +2,6 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <!-- Улучшенный мета-тег для мобильных -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Калькулятор модели и операторов</title>
     <style>
@@ -34,208 +33,84 @@
             margin: 5px 0;
         }
 
-        /* ОСНОВНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ */
-        @media (max-width: 600px) {
-            body {
-                padding: 4px;
-            }
-            
-            .container {
-                padding: 12px;
-                border-radius: 16px;
-            }
-            
-            h1 {
-                font-size: 1.5em;
-                gap: 5px;
-            }
-            
-            h1 span {
-                font-size: 1.3em;
-            }
-            
-            .subtitle {
-                font-size: 0.9em;
-                margin-bottom: 15px;
-                padding-left: 10px;
-            }
-            
-            .block {
-                padding: 12px;
-                margin-bottom: 15px;
-                border-radius: 12px;
-            }
-            
-            .block-title {
-                font-size: 1.2em;
-                margin-bottom: 12px;
-            }
-            
-            /* Сетка модели - 5 колонок на мобильных */
-            .model-grid {
-                display: grid;
-                grid-template-columns: repeat(5, 1fr);
-                gap: 4px;
-                margin-bottom: 15px;
-            }
-            
-            .model-input-group label {
-                font-size: 0.7em;
-                margin-bottom: 3px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            
-            /* УЛУЧШЕННЫЕ ПОЛЯ ВВОДА ДЛЯ МОБИЛЬНЫХ */
-            .input-field {
-                padding: 10px 5px;
-                font-size: 16px !important; /* Увеличиваем шрифт для читаемости */
-                text-align: center;
-                border-radius: 8px;
-                -webkit-appearance: none;
-                appearance: none;
-            }
-            
-            /* Специально для iPhone, чтобы цифры не вылезали */
-            .input-field[type="number"] {
-                -moz-appearance: textfield;
-            }
-            
-            .input-field[type="number"]::-webkit-outer-spin-button,
-            .input-field[type="number"]::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-            
-            /* Контейнеры для результатов */
-            .sum-indicator {
-                padding: 10px 12px;
-                margin-bottom: 10px;
-                border-radius: 8px;
-            }
-            
-            .sum-indicator-label {
-                font-size: 0.85em;
-                white-space: nowrap;
-            }
-            
-            .sum-indicator-value {
-                font-size: 1.1em;
-                white-space: nowrap;
-                margin-left: 8px;
-            }
-            
-            .total-sum-box {
-                padding: 10px 12px;
-                margin-top: 15px;
-                border-radius: 10px;
-            }
-            
-            .total-sum-label {
-                font-size: 0.9em;
-                white-space: nowrap;
-            }
-            
-            .total-sum-value {
-                font-size: 1.4em;
-                white-space: nowrap;
-                margin-left: 8px;
-            }
-            
-            /* Карточки операторов */
-            .operators-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            
-            .operator-card {
-                padding: 12px;
-            }
-            
-            .operator-card .input-group {
-                margin-bottom: 10px;
-            }
-            
-            .operator-card .input-group label {
-                font-size: 0.9em;
-            }
-            
-            .operator-card .input-field {
-                padding: 12px 10px;
-                font-size: 16px;
-                text-align: left; /* Для ввода текста удобнее слева */
-            }
-            
-            .operator-card .result-box {
-                padding: 10px 12px;
-            }
-            
-            .operator-card .result-label {
-                font-size: 0.8em;
-            }
-            
-            .operator-card .result-value {
-                font-size: 1.2em;
-                white-space: nowrap;
-            }
-            
-            /* Кнопка сброса */
-            .reset-btn {
-                padding: 16px 15px;
-                font-size: 20px;
-                border-radius: 40px;
-            }
-            
-            /* Пояснение условий */
-            .condition-note {
-                font-size: 11px;
-                line-height: 1.4;
-            }
+        /* Стили для блока настроек */
+        .settings-block {
+            background: linear-gradient(135deg, #f6f8fa 0%, #eef2f6 100%);
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border: 2px solid #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
         }
 
-        /* Для очень маленьких экранов (iPhone SE и подобные) */
-        @media (max-width: 375px) {
-            .model-grid {
-                gap: 2px;
-            }
-            
-            .model-input-group label {
-                font-size: 0.65em;
-            }
-            
-            .input-field {
-                padding: 8px 3px;
-                font-size: 14px !important;
-            }
-            
-            .sum-indicator-label {
-                font-size: 0.8em;
-            }
-            
-            .sum-indicator-value {
-                font-size: 1em;
-            }
-            
-            .total-sum-label {
-                font-size: 0.85em;
-            }
-            
-            .total-sum-value {
-                font-size: 1.2em;
-            }
-            
-            .operator-card .result-value {
-                font-size: 1.1em;
-            }
-            
-            .reset-btn {
-                padding: 14px 12px;
-                font-size: 18px;
-            }
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        /* Десктопные стили (без изменений) */
+        .settings-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .settings-title span {
+            font-size: 1.4em;
+        }
+
+        .settings-input-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .settings-input {
+            width: 120px;
+            padding: 12px 15px;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+            background: white;
+            outline: none;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+        }
+
+        .settings-input:focus {
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+        }
+
+        .settings-input::placeholder {
+            color: #667eea;
+            opacity: 0.4;
+            font-weight: 500;
+        }
+
+        /* Запрет отрицательных значений для всех полей ввода */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        /* Визуальное предупреждение при попытке ввести отрицательное */
+        .input-field.error, .settings-input.error {
+            border-color: #ff6b6b;
+            background-color: #fff0f0;
+        }
+
         h1 {
             color: #333;
             font-size: 2em;
@@ -305,7 +180,7 @@
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             font-size: 16px;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, background-color 0.3s;
             outline: none;
         }
 
@@ -466,6 +341,38 @@
             font-style: normal;
             text-align: right;
         }
+
+        /* Мобильная адаптация */
+        @media (max-width: 600px) {
+            .settings-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .settings-input {
+                width: 100%;
+                max-width: 150px;
+            }
+            
+            .model-grid {
+                gap: 4px;
+            }
+            
+            .model-input-group label {
+                font-size: 0.7em;
+            }
+            
+            .input-field {
+                padding: 10px 5px;
+                font-size: 16px !important;
+                text-align: center;
+            }
+            
+            .operators-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -476,6 +383,18 @@
         </h1>
         <div class="subtitle">
             Зацени, сколько вы заработали💸!
+        </div>
+
+        <!-- Блок: Актуальный курс -->
+        <div class="settings-block">
+            <div class="settings-header">
+                <div class="settings-title">
+                    <span>💵</span> Актуальный курс
+                </div>
+                <div class="settings-input-wrapper">
+                    <input type="number" id="baseValue" class="settings-input" placeholder="0" step="0.1" min="0">
+                </div>
+            </div>
         </div>
 
         <!-- Блок 1: Модель -->
@@ -510,7 +429,7 @@
             </div>
             <div class="condition-note">
                 * если меньше 299.99 → 2000<br>
-                * если больше 999.99 → X*65/4/2
+                * если больше 999.99 → X * КУРС / 4 / 2
             </div>
         </div>
 
@@ -518,18 +437,66 @@
     </div>
 
     <script>
-        const MODEL_FORMULA = (x) => (x * 65) / 4;
+        // --- Получаем базовое значение из поля ввода ---
+        const baseInput = document.getElementById('baseValue');
+        
+        // --- Функция для предотвращения отрицательных значений ---
+        function preventNegative(inputElement) {
+            const value = parseFloat(inputElement.value);
+            if (!isNaN(value) && value < 0) {
+                inputElement.value = '';
+                // Добавляем класс ошибки на короткое время
+                inputElement.classList.add('error');
+                setTimeout(() => {
+                    inputElement.classList.remove('error');
+                }, 300);
+            }
+        }
+
+        // --- Функции для получения текущего базового значения ---
+        function getBaseValue() {
+            // Если поле пустое, возвращаем 0
+            if (baseInput.value === '') return 0;
+            
+            const val = parseFloat(baseInput.value);
+            // Если не число или отрицательное, возвращаем 0
+            return isNaN(val) || val < 0 ? 0 : val;
+        }
+
+        // --- Формулы с использованием базового значения ---
+        const MODEL_FORMULA = (x) => {
+            const base = getBaseValue();
+            // Если курс 0, результат тоже 0
+            if (base === 0) return 0;
+            return (x * base) / 4;
+        };
+        
         const OPERATOR_FORMULA = (x, isEmpty) => {
             if (isEmpty) return 0;
+            
+            const base = getBaseValue();
+            
+            // Условие 1: Если значение меньше 299.99, возвращаем 2000
             if (x < 299.99) return 2000;
-            if (x > 999.99) return (x * 65) / 4 / 2;
-            const base = (x * 65) / 4;
-            return base * 0.4;
+            
+            // Условие 2: Если значение больше 999.99, применяем формулу X*base/4/2
+            if (x > 999.99) {
+                // Если курс 0, результат 0
+                if (base === 0) return 0;
+                return (x * base) / 4 / 2;
+            }
+            
+            // Условие 3: Для всех остальных случаев (от 299.99 до 999.99)
+            // применяем формулу X*base/4-60%
+            if (base === 0) return 0;
+            const baseResult = (x * base) / 4;
+            return baseResult * 0.4;
         };
 
         const OPERATOR_COUNT = 5;
         const MODEL_FIELDS_COUNT = 5;
 
+        // --- Элементы DOM ---
         const modelGrid = document.getElementById('modelGrid');
         const modelSum = document.getElementById('modelSum');
         const modelResult = document.getElementById('modelResult');
@@ -538,28 +505,40 @@
         const totalOperatorsSum = document.getElementById('totalOperatorsSum');
         const resetBtn = document.getElementById('resetBtn');
 
+        // Хранилища
         const modelInputs = [];
         const operatorInputs = [];
         const operatorResults = [];
 
         let isSyncing = false;
 
+        // --- Форматирование ---
         function formatNumber(value) {
             if (isNaN(value) || value === null || value === '') return '0.000';
             return value.toFixed(3);
         }
 
+        // --- Обновление всего приложения при изменении базового значения ---
+        function updateAllCalculations() {
+            updateModel();
+            updateAllOperators();
+        }
+
+        // --- Обновление модели ---
         function updateModel() {
             if (isSyncing) return;
+            
             let sum = 0;
             modelInputs.forEach(input => {
                 const val = parseFloat(input.value);
                 if (!isNaN(val)) sum += val;
             });
+            
             modelSum.textContent = sum.toFixed(3);
             modelResult.textContent = formatNumber(MODEL_FORMULA(sum));
         }
 
+        // --- Синхронизация из модели в операторы ---
         function syncModelToOperators() {
             isSyncing = true;
             for (let i = 0; i < MODEL_FIELDS_COUNT; i++) {
@@ -571,6 +550,7 @@
             isSyncing = false;
         }
 
+        // --- Обновление суммы полей операторов ---
         function updateOperatorsSum() {
             let sum = 0;
             operatorInputs.forEach(input => {
@@ -580,6 +560,7 @@
             operatorsSum.textContent = sum.toFixed(3);
         }
 
+        // --- Обновление итоговой суммы операторов ---
         function updateTotalSum() {
             let total = 0;
             operatorResults.forEach(resultSpan => {
@@ -589,6 +570,7 @@
             totalOperatorsSum.textContent = formatNumber(total);
         }
 
+        // --- Обновление одного оператора ---
         function updateOperator(index, skipSync = false) {
             const input = operatorInputs[index];
             const resultSpan = operatorResults[index];
@@ -603,65 +585,106 @@
             }
         }
 
+        // --- Обновление всех операторов ---
         function updateAllOperators() {
             for (let i = 0; i < OPERATOR_COUNT; i++) updateOperator(i);
             updateOperatorsSum();
             updateTotalSum();
         }
 
+        // --- Создание полей модели ---
         function createModelFields() {
             modelGrid.innerHTML = '';
             modelInputs.length = 0;
+            
             for (let i = 1; i <= MODEL_FIELDS_COUNT; i++) {
                 const inputGroup = document.createElement('div');
                 inputGroup.className = 'model-input-group';
                 const inputId = `modelInput${i}`;
+                
                 inputGroup.innerHTML = `
                     <label for="${inputId}">Смена ${i}</label>
-                    <input type="number" id="${inputId}" class="input-field" placeholder="0" step="any" inputmode="numeric">
+                    <input type="number" id="${inputId}" class="input-field" placeholder="0" step="any" inputmode="numeric" min="0">
                 `;
+                
                 modelGrid.appendChild(inputGroup);
+                
                 const inputEl = document.getElementById(inputId);
                 modelInputs.push(inputEl);
-                inputEl.addEventListener('input', () => {
+                
+                // Добавляем защиту от отрицательных значений
+                inputEl.addEventListener('input', function() {
+                    preventNegative(this);
                     updateModel();
                     syncModelToOperators();
+                });
+                
+                // Также защищаем от вставки отрицательных значений через контекстное меню
+                inputEl.addEventListener('change', function() {
+                    preventNegative(this);
                 });
             }
         }
 
+        // --- Создание карточек операторов ---
         function createOperators() {
             operatorsContainer.innerHTML = '';
             operatorInputs.length = 0;
             operatorResults.length = 0;
+            
             for (let i = 1; i <= OPERATOR_COUNT; i++) {
                 const card = document.createElement('div');
                 card.className = 'operator-card';
                 const inputId = `operator${i}Input`;
                 const resultId = `operator${i}Result`;
+                
                 card.innerHTML = `
                     <div class="input-group">
                         <label for="${inputId}">Смена №${i}</label>
-                        <input type="number" id="${inputId}" class="input-field" placeholder="0" step="any" inputmode="numeric">
+                        <input type="number" id="${inputId}" class="input-field" placeholder="0" step="any" inputmode="numeric" min="0">
                     </div>
                     <div class="result-box">
                         <span class="result-label">Результат ${i}:</span>
                         <span class="result-value" id="${resultId}">0.000</span>
                     </div>
                 `;
+                
                 operatorsContainer.appendChild(card);
+                
                 const inputEl = document.getElementById(inputId);
                 const resultEl = document.getElementById(resultId);
+                
                 operatorInputs.push(inputEl);
                 operatorResults.push(resultEl);
-                inputEl.addEventListener('input', (function(idx) {
-                    return function() { if (!isSyncing) updateOperator(idx); };
-                })(i - 1));
+                
+                // Добавляем защиту от отрицательных значений
+                inputEl.addEventListener('input', (function(idx, el) {
+                    return function() { 
+                        preventNegative(el);
+                        if (!isSyncing) updateOperator(idx); 
+                    };
+                })(i - 1, inputEl));
+                
+                inputEl.addEventListener('change', function() {
+                    preventNegative(this);
+                });
             }
+            
             updateOperatorsSum();
             updateTotalSum();
         }
 
+        // --- Добавляем защиту для поля курса ---
+        baseInput.addEventListener('input', function() {
+            preventNegative(this);
+            updateAllCalculations();
+        });
+        
+        baseInput.addEventListener('change', function() {
+            preventNegative(this);
+        });
+
+        // --- Сброс всех полей (кроме курса) ---
         function resetAllToDefault() {
             isSyncing = true;
             modelInputs.forEach(input => input.value = '');
@@ -671,12 +694,17 @@
             updateAllOperators();
         }
 
+        // --- Инициализация ---
         function initApp() {
             createModelFields();
             createOperators();
+            
             resetBtn.addEventListener('click', resetAllToDefault);
+            
             updateModel();
             updateAllOperators();
+            
+            console.log('Приложение готово. Отрицательные значения запрещены во всех полях');
         }
 
         document.addEventListener('DOMContentLoaded', initApp);
